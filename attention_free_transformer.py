@@ -50,3 +50,13 @@ class AttentionFreeTransformer(nn.Module):
 
         return out
 
+
+def run():
+    sample = torch.randn(50, 49, 512)
+    aft = AttentionFreeTransformer(dim=512, n=49)
+    output = aft(sample)
+    print(output.shape)
+
+
+if __name__ == '__main__':
+    run()
