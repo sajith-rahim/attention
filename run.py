@@ -1,10 +1,10 @@
 import torch
 
-from self_attention import SelfAttention
+from self_attention import ScaledDotSelfAttention
 
 
 def run():
-    attn = SelfAttention(256, 4)
+    attn = ScaledDotSelfAttention(256, 4)
 
     sample = torch.randn(1, 5, 256)
 
