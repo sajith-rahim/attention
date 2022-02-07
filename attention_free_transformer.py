@@ -34,3 +34,19 @@ class AttentionFreeTransformer(nn.Module):
         self.n = n
         self.sigmoid = nn.Sigmoid()
 
+    def forward(self, input):
+
+        batch_size, n, dim = input.shape
+
+        q = self.fc_q(input)  # batch_size,n,dim
+        k = self.fc_k(input).view(1, batch_size, n, dim)  # 1,batch_size,n,dim
+        v = self.fc_v(input).view(1, batch_size, n, dim)  # 1,batch_size,n,dim
+
+        numerator = torch.sum(torch.exp(k + self.position_biases.view(n, 1, -1, 1)) * v, dim=2)  # n,batch_size,dim
+        denominator = torch.sum(torch.exp(k + self.position_biases.view(n, 1, -1, 1)), dim=2)  # n,batch_size,dim
+
+        out = (numerator / denominator)  # n,batch_size,dim
+        out = self.sigmoid(q) * (out.permute(1, 0, 2))  # batch_size,n,dim
+
+        return out
+
