@@ -4,7 +4,7 @@ import torch.nn as nn
 from plot_util import plot
 
 
-class SelfAttention(nn.Module):
+class ScaledDotSelfAttention(nn.Module):
     r"""
     Multi-head self attention.
     * query, key and val has same dimension.
