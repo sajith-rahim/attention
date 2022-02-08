@@ -16,7 +16,7 @@ class ScaledDotSelfAttention(nn.Module):
         :param dim: embedded input dimension (output dim as well)
         :param n_heads: number of heads
         """
-        super(SelfAttention, self).__init__()
+        super(ScaledDotSelfAttention, self).__init__()
 
         self.n_heads = n_heads
         self.dim = dim
